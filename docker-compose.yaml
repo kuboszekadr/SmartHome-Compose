@@ -1,0 +1,54 @@
+version: '3.8'
+
+services: 
+    database:
+        build: ./SmartHome-Database
+        volumes: 
+            - ./SmartHome-Database:/usr/src/app
+        ports:
+            - 5432:5432
+        env_file:
+            - ./SmartHome-Database/.env
+        container_name: database
+    backend:
+        build: ./SmartHome-Backend
+        volumes: 
+            - ./SmartHome-Backend:/usr/src/app
+        ports:
+            - 8080:8000
+        env_file: 
+            - ./SmartHome-Backend/.env
+        container_name: backend
+        depends_on:
+            - database
+    frontend:
+        build: ./SmartHome-Frontend
+        volumes:
+            - ./SmartHome-Frontend:/var/www
+        ports: 
+            - 5000:5000
+        env_file:
+            - ./SmartHome-Frontend/.env
+        container_name: frontend
+        depends_on:
+            - backend
+    tauron:
+        build: ./SmartHome-TauronEMeter
+        volumes: 
+            - ./SmartHome-TauronEMeter:/usr/src/app
+        env_file:
+            - ./SmartHome-Frontend/.env   
+        container_name: tauron
+        depends_on:
+            - backend
+        tty: true
+    solarman:
+        build: ./SmartHome-SolarMan
+        volumes: 
+            - ./SmartHome-SolarMan:/usr/src/app
+        env_file:
+            - ./SmartHome-SolarMan/.env
+        container_name: solarman
+        depends_on:
+            - backend
+        tty: true
