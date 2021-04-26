@@ -4,7 +4,7 @@ services:
     database:
         build: ./SmartHome-Database
         volumes: 
-            - ./SmartHome-Database:/usr/src/app
+            - database:/var/lib/postgresql/11/main
         ports:
             - 5432:5432
         env_file:
@@ -13,7 +13,7 @@ services:
     backend:
         build: ./SmartHome-Backend
         volumes: 
-            - ./SmartHome-Backend:/usr/src/app
+            - apps:/usr/src/app
         ports:
             - 8080:8000
         env_file: 
@@ -24,7 +24,7 @@ services:
     frontend:
         build: ./SmartHome-Frontend
         volumes:
-            - ./SmartHome-Frontend:/var/www
+            - apps:/var/www
         ports: 
             - 5000:5000
         env_file:
@@ -35,7 +35,7 @@ services:
     tauron:
         build: ./SmartHome-TauronEMeter
         volumes: 
-            - ./SmartHome-TauronEMeter:/usr/src/app
+            - apps:/usr/src/app
         env_file:
             - ./SmartHome-Frontend/.env   
         container_name: tauron
@@ -45,10 +45,13 @@ services:
     solarman:
         build: ./SmartHome-SolarMan
         volumes: 
-            - ./SmartHome-SolarMan:/usr/src/app
+            - apps:/usr/src/app
         env_file:
             - ./SmartHome-SolarMan/.env
         container_name: solarman
         depends_on:
             - backend
         tty: true
+volumes: 
+    apps:
+    database:
