@@ -22,13 +22,13 @@ services:
         depends_on:
             - database
     frontend:
-        build: ./SmartHome-Frontend
+        build: ./SmartHome-FrontEnd
         volumes:
             - apps:/var/www
         ports: 
             - 5000:5000
         env_file:
-            - ./SmartHome-Frontend/.env
+            - ./SmartHome-FrontEnd/.env
         container_name: frontend
         depends_on:
             - backend
@@ -36,8 +36,6 @@ services:
         build: ./SmartHome-TauronEMeter
         volumes: 
             - apps:/usr/src/app
-        env_file:
-            - ./SmartHome-Frontend/.env   
         container_name: tauron
         depends_on:
             - backend
