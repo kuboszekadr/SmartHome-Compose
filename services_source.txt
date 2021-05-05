@@ -1,0 +1,5 @@
+https://github.com/kuboszekadr/SmartHome-TauronEMeter.git
+https://github.com/kuboszekadr/SmartHome-Database.git
+https://github.com/kuboszekadr/SmartHome-Backend.git
+https://github.com/kuboszekadr/SmartHome-FrontEnd.git
+https://github.com/kuboszekadr/SmartHome-SolarMan.git
