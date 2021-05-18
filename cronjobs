@@ -1,8 +1,0 @@
-# downloads solar-pane data
-0-55/5 * * * * sudo docker exec solarman python main.py
-
-# download eneregy usage data
-0 12 * * * sudo docker exec tauron python main.py
-
-# make sure to create and config .pgpass before task is run
-0 0 * * * sudo su postgres -c "pg_dumpall -U postgres -h 192.168.0.141 -p 5432 -a" > "/home/pi/Documents/data/data.sql"
