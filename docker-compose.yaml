@@ -36,6 +36,8 @@ services:
         build: ./SmartHome-TauronEMeter
         volumes: 
             - apps:/usr/src/app
+        env_file:
+            - ./SmartHome-TauronEMeter/.env            
         container_name: tauron
         depends_on:
             - backend
